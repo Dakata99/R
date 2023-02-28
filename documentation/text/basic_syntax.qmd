@@ -68,8 +68,8 @@ x; y; z # Prints
 
 Differences between them:
 <ol>
-    <li>They have different operator precedence (look at ?Syntax).</li>
-    <li>= has two meanings:</li>
+    <li>They have different operator precedence (look at `?Syntax`).</li>
+    <li>`=` has two meanings:</li>
         <ul>
             <li>operator: assignment operator</li>
             <li>syntax token: named argument passing in a function call</li>

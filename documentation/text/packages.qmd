@@ -51,7 +51,8 @@ sessionInfo()
 ## Unloading packages
 
 Sometimes you need to unload a package.
-```
+```{r}
+#| eval: false
 detach("package:MASS")
 ```
 

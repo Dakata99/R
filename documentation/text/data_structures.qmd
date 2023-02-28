@@ -186,7 +186,7 @@ head(sort(precip, decreasing = TRUE), n = 15)
 ## Lists
 
 Lists are ordered sets of components stored in a vector. The objects in the list are not necessarily from the same type, the same data structure or the same length. To create a list in R we use the function list.
-```
+```{r}
 > x <- list(1, 2, 3); x
 [[1]]
 [1] 1
@@ -250,7 +250,7 @@ $c
 ```
 
 We can see each component’s structure using the str function:
-```
+```{r}
 > str(p)
 List of 3
  $ a: num [1:4] 1 2 4 5
@@ -262,8 +262,10 @@ List of 3
   ..$ x: int [1:10] 1 2 3 4 5 6 7 8 9 10
   ..$ y: logi [1:10] TRUE FALSE TRUE FALSE TRUE FALSE ...
 ```
+
 Each component from the list can be extracted using the $ sign followed by the component’s name or **[[\<index>]]**
-```
+
+```{r}
 > p$a
 [1] 1 2 4 5
 > p[[1]]
@@ -275,36 +277,30 @@ Each component from the list can be extracted using the $ sign followed by the c
 ```
 
 We can list the names of the components in the list using **names** function
-```
+
+```{r}
 > names(p)
 [1] "a" "b" "c"
 > names(p$b)
 [1] "c" "d" "e"
 ```
 
-<details>
-    <summary>Matrix</summary>
+## Matrix
 
 All of the elements in a matrix must be of the same type. To create a matrix in R we use the function matrix.
-```
-> A <- matrix(c(2, 4, 1, 5, 7, 6),
-+            nrow = 2,
-+            ncol = 3)
+
+```{r}
+> A <- matrix(c(2, 4, 1, 5, 7, 6), nrow = 2, ncol = 3)
 > A
      [,1] [,2] [,3]
 [1,]    2    1    7
 [2,]    4    5    6
-> A <- matrix(c(2, 4, 1, 5, 7, 6),
-+            nrow = 2,
-+            ncol = 3,
-+            byrow = TRUE)
+> A <- matrix(c(2, 4, 1, 5, 7, 6), nrow = 2, ncol = 3, byrow = TRUE)
 > A
      [,1] [,2] [,3]
 [1,]    2    4    1
 [2,]    5    7    6
-> B <- matrix(c(2, 4, 3, 1, 5, 7),
-+            nrow = 3,
-+            ncol = 2)
+> B <- matrix(c(2, 4, 3, 1, 5, 7), nrow = 3, ncol = 2)
 > B
      [,1] [,2]
 [1,]    2    1
@@ -313,13 +309,14 @@ All of the elements in a matrix must be of the same type. To create a matrix in 
 ```
 
 Dimensions of the matrix
-```
+```{r}
 > dim(B)
 [1] 3 2
 ```
 
 Taking elements of the matrix:
-```
+
+```{r}
 > A[2, 3]
 [1] 6
 > A[2, ]
@@ -333,7 +330,7 @@ Taking elements of the matrix:
 ```
 
 Operations on matrices:
-```
+```{r}
 > A
      [,1] [,2] [,3]
 [1,]    2    4    1
@@ -356,8 +353,8 @@ Operations on matrices:
 [2,]   10   14   12
 ```
 
-t transpose the matrix:
-```
+`t` transpose the matrix:
+```{r}
 > t(A)
      [,1] [,2]
 [1,]    2    5
@@ -365,16 +362,16 @@ t transpose the matrix:
 [3,]    1    6
 ```
 
-%*% algebraic multiplication of two matrices
-```
+`%*%` algebraic multiplication of two matrices
+```{r}
 > G %*% t(A)
      [,1] [,2]
 [1,]    7   18
 [2,]   14   36
 ```
 
-cbind combine a sequence of vector, matrix or data frame by columns
-```
+`cbind` combine a sequence of vector, matrix or data frame by columns
+```{r}
 > cbind(c(1, 2, 3), c(3, 4, 5))
      [,1] [,2]
 [1,]    1    3
@@ -387,8 +384,8 @@ cbind combine a sequence of vector, matrix or data frame by columns
 [3,]    3    7    5
 ```
 
-rbind combine a sequence of vector, matrix or data frame by rows
-```
+`rbind` combine a sequence of vector, matrix or data frame by rows
+```{r}
 > rbind(c(1, 2, 3), c(3, 4, 5))
      [,1] [,2] [,3]
 [1,]    1    2    3
@@ -400,8 +397,8 @@ rbind combine a sequence of vector, matrix or data frame by rows
 [3,]    3    4    5
 ```
 
-dimnames set names to the dimensions of the object
-```
+`dimnames` set names to the dimensions of the object
+```{r}
 > dimnames(C) <- list(c("r1", "r2", "r3"), c("c1", "c2", "c3"))
 > C
    c1 c2 c3
@@ -411,7 +408,7 @@ r3  3  4  5
 ```
 
 You can also use colnames and rownames functions to set the names of the object
-```
+```{r}
 > colnames(C) <- c("col1", "col2", "col3")
 > C
    col1 col2 col3
@@ -425,13 +422,12 @@ row1    2    4    1
 row2    5    7    6
 row3    3    4    5
 ```
-</details>
 
-<details>
-    <summary>Arrays</summary>
+## Arrays
 
 Arrays are multidimensional vectors. All the elements in the array must be of the same type. To create an array in R we use the function array.
-```
+
+```{r}
 > x <- array(1:24, dim = c(4, 3, 2)); x
 , , 1
 
@@ -451,7 +447,7 @@ Arrays are multidimensional vectors. All the elements in the array must be of th
 ```
 
 Taking elements of the array
-```
+```{R}
 > x[1, , ]
      [,1] [,2]
 [1,]    1   13
@@ -467,7 +463,7 @@ Taking elements of the array
 [4,]    4    8   12
 ```
 
-dimnames set names to the dimensions of the object
+`dimnames` set names to the dimensions of the object
 ```
 > dimnames(x) <- list(c("x1", "x2", "x3", "x4"), c("y1", "y2", "y3"), c("z1", "z2"))
 > x
@@ -487,13 +483,12 @@ x2 14 18 22
 x3 15 19 23
 x4 16 20 24
 ```
-</details>
 
-<details>
-    <summary>Data frames</summary>
+## Data frames
 
 Data frames hold vectors not necessarily from the same type but with the same length. To create a data frame in R we use the function data.frame.
-```
+
+```{r}
 > first <- 1:10 
 > second <- c("aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj") 
 > third <- c(TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE) 
@@ -515,8 +510,9 @@ Data frames hold vectors not necessarily from the same type but with the same le
 
 You can use View function to visualize the data frame in a separate window.
 
-head and tail visualize the first 6 respectively the last 6 set of rows of the data frame
-```
+`head` and `tail` visualize the first 6 respectively the last 6 set of rows of the data frame
+
+```{r}
 > head(df)
   first second third
 1     1     aa  TRUE
@@ -536,7 +532,8 @@ head and tail visualize the first 6 respectively the last 6 set of rows of the d
 ```
 
 We can change this for example to the first 3 respectively the last 3 set of rows of the data frame
-```
+
+```{r}
 > head(df, n = 3)
   first second third
 1     1     aa  TRUE
@@ -549,8 +546,9 @@ We can change this for example to the first 3 respectively the last 3 set of row
 10    10     jj FALSE
 ```
 
-dim, nrow and ncol shows the dimensions of the data frame
-```
+`dim`, `nrow` and `ncol` shows the dimensions of the data frame
+
+```{r}
 > dim(df)
 [1] 10  3
 > dim(df)[1]
@@ -564,7 +562,8 @@ dim, nrow and ncol shows the dimensions of the data frame
 ```
 
 To view the data types of the columns we can use the str function
-```
+
+```{r}
 > str(df)
 'data.frame':   10 obs. of  3 variables:
  $ first : int  1 2 3 4 5 6 7 8 9 10
@@ -573,7 +572,8 @@ To view the data types of the columns we can use the str function
 ```
 
 It is possible to give or change the names of the columns of the data frame
-```
+
+```{r}
 > df <- data.frame(A = first, B = second, C = third); df
     A  B     C
 1   1 aa  TRUE
@@ -588,14 +588,14 @@ It is possible to give or change the names of the columns of the data frame
 10 10 jj FALSE
 ```
 
-names shows the names of the columns of the data frame
-```
+`names` shows the names of the columns of the data frame
+```{r}
 > names(df)
 [1] "A" "B" "C"
 ```
 
 You can give names to the rows and columns of the data frame using the colnames and rownames functions
-```
+```{r}
 > colnames(df) <- c("f", "s", "t"); df
     f  s     t
 1   1 aa  TRUE
@@ -623,7 +623,7 @@ ten   10 jj FALSE
 ```
 
 or we can use predefined constants for the names
-```
+```{r}
 > colnames(df) <- LETTERS[1:3]; df
        A  B     C
 one    1 aa  TRUE
@@ -651,7 +651,7 @@ October   10 jj FALSE
 ```
 
 Data frame attributes: names lists the names of the columns and row.names lists the names of the rows.
-```
+```{r}
 > attributes(df)
 $names
 [1] "A" "B" "C"
@@ -674,56 +674,48 @@ $row.names
 Taking elements of a data frame
 
 Taking the element from the 2 row, 3 column
-```
+```{r}
 > df[2, 3]
 [1] FALSE
 ```
 
 Taking the elements from the 2 row
-```
+```{r}
 > df[2, ]
          A  B     C
 February 2 bb FALSE
 ```
 
 Taking the elements from the 3 column
-```
+```{r}
 > df[, 3]
  [1]  TRUE FALSE  TRUE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE
 ```
 
 Taking the elements from the 2 row, 2 and 3 columns
-```
+```{r}
 > df[2, 2:3]
           B     C
 February bb FALSE
 ```
 
 Taking the elements from the 2 row, columns “A” and “B”
-```
+```{r}
 > df[2, c("A" , "B")]
          A  B
 February 2 bb
 ```
 
 Taking the elements from the column “A”
-```
+```{r}
 > df$A
  [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 Taking the elements from the 2 column
-```
+```{r}
 > df[[2]]
  [1] "aa" "bb" "cc" "dd" "ee" "ff" "gg" "hh" "ii" "jj"
 ```
-</details>
 
-<details>
-    <summary>Additional notes</summary>
-
-- For execution on Linux (in terminal):
-    ```
-        Rscript main.R
-    ```
-</details>
+## Additional notes

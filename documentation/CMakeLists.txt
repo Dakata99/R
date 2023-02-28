@@ -14,7 +14,7 @@ find_program(BROWSER sensible-browser)
 
 add_custom_target(display_documentation
     COMMENT "Opening documentation in default web browser"
-    COMMAND ${BROWSER} "build/publish/index.html"
+    COMMAND ${BROWSER} "${PROJECT_SOURCE_DIR}/build/publish/index.html"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     DEPENDS build_documentation
 )
