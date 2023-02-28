@@ -69,4 +69,15 @@ Residuals       297 937163  3155
 ```
 Анализирайте ги.
 
+```
+df <- data.frame(A, B, C)
+aov.ex <- aov(base ~ A + B + C, data = df)
+summary(aov.ex)
+```
+
+```
+df = data.frame(gr = c(rep("A", 3), rep("B", 3), rep("C", 3)))
+value = c(supplement[,1], supplement[,2], supplement[,3])
+summary(anv <- aov(value ~ gr, data = DF))
+```
 </details>

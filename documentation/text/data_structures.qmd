@@ -1,38 +1,28 @@
 # Data structures
 
-<details>
-    <summary>Vector</summary>
+## Vector
 
 Vectors are collections of elements from the **same type**. They keep track of the **order** that the data is entered in. Their **indexing** starts from **1**. You can create a vector in R using the combine function **c**.
 
-```
-> x <- c(1, 2, 3); x
-[1] 1 2 3
-> y <- c(4, 5, 6, 7, 8, 9, 10); y
-[1]  4  5  6  7  8  9 10
-> z <- c(FALSE, TRUE); z
-[1] FALSE  TRUE
-> str <- c("e", "x", "a", "m", "p", "l", "e"); str
-[1] "e" "x" "a" "m" "p" "l" "e"
+```{r}
+#| collapse: true
+x <- c(1, 2, 3); x
+y <- c(4, 5, 6, 7, 8, 9, 10); y
+z <- c(FALSE, TRUE); z
+str <- c("e", "x", "a", "m", "p", "l", "e"); str
 ```
 
 Note that the vector has a type and can only store data from **one type**.
 
-```
-> typeof(x)
-[1] "double"
-> typeof(y)
-[1] "double"
-> typeof(z)
-[1] "logical"
-> typeof(str)
-[1] "character"
-> typeof(pi)
-[1] "double"
-> p <- c(5, 6.4, "string"); p
-[1] "5"      "6.4"    "string"
-> typeof(p)
-[1] "character"
+```{r}
+#| collapse: true
+typeof(x)
+typeof(y)
+typeof(z)
+typeof(str)
+typeof(pi)
+p <- c(5, 6.4, "string"); p
+typeof(p)
 ```
 
 Note that in such situations, R will convert the element types to the **highest common type** following the order
@@ -41,211 +31,159 @@ Note that in such situations, R will convert the element types to the **highest 
 
 R is a **vectorized language**, so operations are applied to each element of the vector automatically, without the need to loop through the vector.
 
-```
-> x <- c(1, 2, 3); x
-[1] 1 2 3
-> x + 2
-[1] 3 4 5
-> 5 * x
-[1]  5 10 15
-> x^2
-[1] 1 4 9
-> sqrt(x)
-[1] 1.000000 1.414214 1.732051
+```{r}
+#| collapse: true
+x <- c(1, 2, 3); x
+x + 2
+5 * x
+x^2
+sqrt(x)
 ```
 
 We also has a reduction functions **length**, **sum** that reduce down to a number.
 
-```
-> length(x)
-[1] 3
-> sum(x)
-[1] 6
+```{r}
+#| collapse: true
+length(x)
+sum(x)
 ```
 
 Operations on vectors with the **same length**.
-```
-> x <- c(1, 2, 3)
-> y <- c(5, 6, 7)
-> x + y
-[1]  6  8 10
-> y - x
-[1] 4 4 4
-> x * y
-[1]  5 12 21
-> x / y
-[1] 0.2000000 0.3333333 0.4285714
+```{r}
+#| collapse: true
+x <- c(1, 2, 3)
+y <- c(5, 6, 7)
+x + y
+y - x
+x * y
+x / y
 ```
 
 If the two vectors are with different length, to make the operation we repeat the elements of the shorter vector until the vectors has the same length and then perform the operation.
 
-```
-> x <- c(1, 2, 3)
-> y <- c(5, 6, 7, 8, 9, 10)
-> x + y 
-[1]  6  8 10  9 11 13
-> y - x
-[1] 4 4 4 7 7 7
-> x * y
-[1]  5 12 21  8 18 30
-> x / y
-[1] 0.2000000 0.3333333 0.4285714 0.1250000 0.2222222 0.3000000
+```{r}
+#| collapse: true
+x <- c(1, 2, 3)
+y <- c(5, 6, 7, 8, 9, 10)
+x + y 
+y - x
+x * y
+x / y
 ```
 
 Taking elements from the vector:
-```
-> y <- c(5, 6, 7, 8, 9, 10)
-> y[3]
-[1] 7
-> y[c(3, 4)]
-[1] 7 8
-> y[c(4, 2, 3)]
-[1] 8 6 7
-> y[-3]
-[1]  5  6  8  9 10
-> y[8]
-[1] NA
+```{r}
+#| collapse: true
+y <- c(5, 6, 7, 8, 9, 10)
+y[3]
+y[c(3, 4)]
+y[c(4, 2, 3)]
+y[-3]
+y[8]
 ```
 
 You can also assign value to a specific index:
-```
-> y[9] <- 11
-> y
-[1]  5  6  7  8  9 10 NA NA 11
+```{r}
+#| collapse: true
+y[9] <- 11
+y
 ```
 
 If the right-hand side has fewer elements than the data vector referred on the left-hand side, R will recycle the value on the right-hand side. This makes it easy to assign many values at once.
-```
-> y[10:15] <- 3
-> y
- [1]  5  6  7  8  9 10 NA NA 11  3  3  3  3  3  3
+```{r}
+#| collapse: true
+y[10:15] <- 3
+y
 ```
 
 Indexing by 0 returns a 0-length data vector.
-```
-> y[0]
-numeric(0)
+```{r}
+#| collapse: true
+y[0]
 ```
 
 If no indexing is specified, the entire data vector is returned.
-```
-> y[]
- [1]  5  6  7  8  9 10 NA NA 11  3  3  3  3  3  3
+```{r}
+#| collapse: true
+y[]
 ```
 
 Different ways to generate vectors:
-```
-> 1:12
- [1]  1  2  3  4  5  6  7  8  9 10 11 12
-> 1:-9
- [1]  1  0 -1 -2 -3 -4 -5 -6 -7 -8 -9
-> seq(1, 17, by = 2)
-[1]  1  3  5  7  9 11 13 15 17
-> seq(0, 100, length.out = 5)
-[1]   0  25  50  75 100
-> rep(1:3, times = 2)
-[1] 1 2 3 1 2 3
-> rep(1:3, times = 3:1)
-[1] 1 1 1 2 2 3
-> rep(1:3, each = 2)
-[1] 1 1 2 2 3 3
-> rep(1:3, each = 2, times = 2)
- [1] 1 1 2 2 3 3 1 1 2 2 3 3
+```{r}
+#| collapse: true
+1:12
+1:-9
+seq(1, 17, by = 2)
+seq(0, 100, length.out = 5)
+rep(1:3, times = 2)
+rep(1:3, times = 3:1)
+rep(1:3, each = 2)
+rep(1:3, each = 2, times = 2)
 ```
 
-Some more examples:
-```
-> x <- 5:7; x
-[1] 5 6 7
-> y <- 2:5; y
-[1] 2 3 4 5
-> y <= 3
-[1]  TRUE  TRUE FALSE FALSE
-> x[y <= 3]
-[1] 5 6
-> sum(y <= 3)
-[1] 2
-> sum(x[y <= 3])
-[1] 11
-> which(y >= 3)
-[1] 2 3 4
-> x[which(y >= 3)]
-[1]  6  7 NA
-> z <- 5:21; z
- [1]  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21
-> z[y <= 3] # Different vectors length!!!
-[1]  5  6  9 10 13 14 17 18 21
+### Some more examples
+```{r}
+#| collapse: true
+x <- 5:7; x
+y <- 2:5; y
+y <= 3
+x[y <= 3]
+sum(y <= 3)
+sum(x[y <= 3])
+which(y >= 3)
+x[which(y >= 3)]
+z <- 5:21; z
+z[y <= 3] # Different vectors length!!!
 ```
 
 We can also have named vectors.
-```
-> testScores <- c(Sophia = 73, Olivia = 87, Bob = 72, Liam = 99)
-> testScores
-Sophia Olivia    Bob   Liam 
-    73     87     72     99 
+```{r}
+#| collapse: true
+testScores <- c(Sophia = 73, Olivia = 87, Bob = 72, Liam = 99)
+testScores
 ```
 
 We can change the names of the students, with their surnames using the names function
+```{r}
+#| collapse: true
+names(testScores) <- c("Brown", "Grant", "Johnson", "Smith")
+testScores
 ```
-> names(testScores) <- c("Brown", "Grant", "Johnson", "Smith")
-> testScores
-  Brown   Grant Johnson   Smith 
-     73      87      72      99
-```
+
 or with their full names using the setNames function
-```
-> testScores <- setNames(c(73, 87, 72, 99), c("Sophia Brown", "Olivia Grant", "Bob Johnson", "Liam Smith"))
-> testScores
-Sophia Brown Olivia Grant  Bob Johnson   Liam Smith 
-          73           87           72           99 
+
+```{r}
+#| collapse: true
+testScores <- setNames(c(73, 87, 72, 99), c("Sophia Brown", "Olivia Grant", "Bob Johnson", "Liam Smith"))
+testScores
 ```
 
 We can see only the names
-```
-> names(testScores)
-[1] "Sophia Brown" "Olivia Grant" "Bob Johnson"  "Liam Smith"  
+```{r}
+#| collapse: true
+names(testScores)
 ```
 
 As you already see their are several functions which take on two forms, one to “get”(names) and one to “set”(names<-) values.
 
 For example precip data set lists the average rainfall in inches for 70 cities in the United States. We can see the rainfall in “Los Angeles”
-```
-> precip["Los Angeles"]
-Los Angeles 
-         14 
-or the first 6 observations using the head, or the last 6 using tail.
 
-> head(precip)
-     Mobile      Juneau     Phoenix Little Rock Los Angeles  Sacramento 
-       67.0        54.7         7.0        48.5        14.0        17.2 
-> tail(precip)
-Seattle Tacoma        Spokane     Charleston      Milwaukee       Cheyenne 
-          38.8           17.4           40.8           29.1           14.6 
-      San Juan 
-          59.2
+```{r}
+#| collapse: true
+precip["Los Angeles"]
+head(precip)
+tail(precip)
 ```
+
 We can sort them:
-```
-> head(sort(precip), n = 15)
-       Phoenix           Reno    Albuquerque        El Paso          Boise 
-           7.0            7.2            7.8            7.8           11.5 
-        Denver    Los Angeles       Cheyenne    Great Falls Salt Lake City 
-          13.0           14.0           14.6           15.0           15.2 
-       Bismark     Sacramento        Spokane  San Francisco       Honolulu 
-          16.2           17.2           17.4           20.7           22.9 
-> head(sort(precip, decreasing = TRUE), n = 15)
-       Mobile         Miami      San Juan   New Orleans        Juneau 
-         67.0          59.8          59.2          56.8          54.7 
- Jacksonville       Jackson       Memphis   Little Rock       Atlanta 
-         54.5          49.2          49.1          48.5          48.3 
-      Houston      Columbia     Nashville Atlantic City       Norfolk 
-         48.2          46.4          46.0          45.5          44.7 
+
+```{r}
+#| collapse: true
+head(sort(precip), n = 15)
+head(sort(precip, decreasing = TRUE), n = 15)
 ```
 
-</details>
-
-<details>
-    <summary>Lists</summary>
+## Lists
 
 Lists are ordered sets of components stored in a vector. The objects in the list are not necessarily from the same type, the same data structure or the same length. To create a list in R we use the function list.
 ```
@@ -343,7 +281,6 @@ We can list the names of the components in the list using **names** function
 > names(p$b)
 [1] "c" "d" "e"
 ```
-</details>
 
 <details>
     <summary>Matrix</summary>
